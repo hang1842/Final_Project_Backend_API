@@ -4,9 +4,8 @@
     {
         public string? Message { get; set; }
 
-        public RegisterResponse(string? message)
+        public RegisterResponse()
         {
-            Message = message;
         }
     }
 }
