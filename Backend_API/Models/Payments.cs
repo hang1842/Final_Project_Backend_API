@@ -11,7 +11,7 @@ namespace Backend_API.Models
         public Personals? personal { get; set; }
         public Merchants? merchants { get; set; }
         public float? Amount { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }= DateTime.Now;
 
         public DateTime? PaidDate { get; set; }
 

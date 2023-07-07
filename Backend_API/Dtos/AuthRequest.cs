@@ -1,11 +1,11 @@
 ﻿namespace Backend.Dtos
 {
-    public class LoginRequest
+    public class AuthRequest
     {
         public string email { get; set; } = default!;
         public string password { get; set; }=default!;
 
-        public LoginRequest(string email, string password)
+        public AuthRequest(string email, string password)
         {
             this.email = email;
             this.password = password;
