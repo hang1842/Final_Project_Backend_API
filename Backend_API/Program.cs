@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization.Policy;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -9,8 +12,52 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvcCore();
-builder.Services.AddAuthentication(authOption=>
-authOption.DefaultAuthenticateScheme=JwtBearer.);
+builder.Services.AddAuthentication(authOption =>
+{
+    authOption.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    authOption.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
+    authOption.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+ .AddJwtBearer(jwtOption =>
+ {
+     var signingKeyData = config["JwtSettings:SigningKey"];
+     var signingKeyBytes = Encoding.UTF8.GetBytes(signingKeyData!);
+     var signingKey = new SymmetricSecurityKey(signingKeyBytes);
+
+     var issuer = config["JwtSettings:Issuer"];
+     var audience = config["JwtSettings:Audience"];
+
+     jwtOption.TokenValidationParameters = new TokenValidationParameters
+     {
+         ValidateAudience = true,
+         ValidateIssuer = true,
+         ValidateLifetime = true,
+         ValidateIssuerSigningKey = true,
+         ValidIssuer = issuer,
+         ValidAudience = audience,
+         IssuerSigningKey = signingKey
+     };
+ });
+
+builder.Services.AddAuthorization(authOption => {
+
+    authOption.AddPolicy("IsAdmin", policyOption => {
+        // policyOption.RequireClaim("Groups", "admin");
+        policyOption.RequireRole("admin");
+    });
+
+    authOption.AddPolicy("IsCustomer", policyOption => {
+        //policyOption.RequireClaim("Groups", "customer");
+        policyOption.RequireRole("customer");
+    });
+
+    authOption.AddPolicy("IsMerchant", policyOption =>
+    {
+        //policyOption.RequireClaim("groups", "manager");
+        policyOption.RequireRole("merchant");
+    });
+});
+
 
 var app = builder.Build();
 
