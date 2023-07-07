@@ -1,4 +1,4 @@
-using 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
