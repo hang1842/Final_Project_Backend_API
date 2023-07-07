@@ -15,6 +15,8 @@ namespace Backend_API.Models
         public string PerPassword { get; set; } = default!;
         public float? PerBalance { get; set; }
 
+        public List<Payments> Payments { get; set; }
+
         public Personals(int perId, string perName, string perEmail, string perPassword, float? perBalance)
         {
             PerId = perId;

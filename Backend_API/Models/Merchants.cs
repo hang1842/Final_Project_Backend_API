@@ -12,6 +12,7 @@ namespace Backend_API.Models
         public string MchEmail { get; set; } = default!;
         public string MchPassword { get; set; } = default!;
         public float? MchBalance { get; set; }
+        public List<Payments> Payments { get; set; }
 
         public Merchants(int mchId, string mchName, string mchEmail, string mchPassword, float? mchBalance)
         {

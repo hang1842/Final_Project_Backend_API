@@ -8,6 +8,8 @@ namespace Backend_API.Models
         public int PaymentId { get; set; }
         public string PerEmail { get; set; } = default!;
         public string MchEmail { get; set; } = default!;
+        public Personals? personal { get; set; }
+        public Merchants? merchants { get; set; }
         public float? Amount { get; set; }
         public DateTime CreateDate { get; set; }
 

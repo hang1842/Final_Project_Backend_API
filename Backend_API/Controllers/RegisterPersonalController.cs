@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace Backend_API.Controllers
 {
-    public class PersonalRegisterController : BaseController
+    public class RegisterPersonalController : BaseController
     {
         const string connectionString = "Server=localhost;Database=payment;Uid=root;Pwd=;";
         private static MySqlConnection connection = new MySqlConnection(connectionString);
