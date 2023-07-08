@@ -1,5 +1,4 @@
 ﻿using Backend.Dtos;
-using Backend_API.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
@@ -11,7 +10,6 @@ namespace Backend_API.Controllers
     {
         const string connectionString = "Server=localhost;Database=payment;Uid=root;Pwd=;";
         private static MySqlConnection connection = new MySqlConnection(connectionString);
-
 
         [HttpPost]
         public ActionResult<RegisterResponse> AddNewMerchant(RegisterMerchantRequest mer)

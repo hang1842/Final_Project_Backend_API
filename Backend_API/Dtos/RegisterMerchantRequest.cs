@@ -1,6 +1,6 @@
 ﻿using Backend_API.Models;
 
-namespace Backend_API.Dtos
+namespace Backend.Dtos
 {
     public class RegisterMerchantRequest
     {

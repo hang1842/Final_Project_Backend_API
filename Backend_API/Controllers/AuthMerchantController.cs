@@ -5,7 +5,7 @@ namespace Backend_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthMerchantController : ControllerBase
+    public class AuthMerchantController : BaseController
     {
     }
 }
