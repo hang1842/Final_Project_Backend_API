@@ -3,22 +3,22 @@ using System.Text;
 
 namespace Backend_API.Models
 {
-    public class Payments
+    public class payments
     {
         public int PaymentId { get; set; }
         public string PerEmail { get; set; } = default!;
         public string MchEmail { get; set; } = default!;
-        public Personals? personal { get; set; }
-        public Merchants? merchants { get; set; }
+        public personals? personal { get; set; }
+        public merchants? merchants { get; set; }
         public float? Amount { get; set; }
-        public DateTime CreateDate { get; set; }= DateTime.Now;
+        public DateTime? CreateDate { get; set; }
 
         public DateTime? PaidDate { get; set; }
 
-        public bool Status { get; set; }
+        public int Status { get; set; } = 0;
 
-        public Payments(int paymentId, string perEmail, string mchEmail, float? amount, 
-            DateTime createDate, DateTime? paidDate, bool status)
+        public payments(int paymentId, string perEmail, string mchEmail, float? amount, 
+            DateTime createDate, DateTime? paidDate, int status)
         {
             PaymentId = paymentId;
             PerEmail = perEmail;

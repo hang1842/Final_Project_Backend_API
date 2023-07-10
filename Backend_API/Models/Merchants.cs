@@ -5,16 +5,16 @@ using System.Text;
 namespace Backend_API.Models
 {
     [Index("MchEmail",IsUnique=true)]
-    public class Merchants
+    public class merchants
     {
         public int MchId { get; set; }
         public string MchName { get; set; } = default!;
         public string MchEmail { get; set; } = default!;
         public string MchPassword { get; set; } = default!;
         public float? MchBalance { get; set; }
-        public List<Payments> Payments { get; set; }
+        public List<payments> payments { get; set; }
 
-        public Merchants(int mchId, string mchName, string mchEmail, string mchPassword, float? mchBalance)
+        public merchants(int mchId, string mchName, string mchEmail, string mchPassword, float? mchBalance)
         {
             MchId = mchId;
             MchName = mchName;

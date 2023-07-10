@@ -9,7 +9,7 @@ namespace Backend.Dtos
         public string password { get; set; } = default!;
         public float? Balance { get; set; }
 
-        public RegisterPersonalRequest(Personals per)
+        public RegisterPersonalRequest(personals per)
         {
             PerName = per.PerName;
             email = per.PerEmail;

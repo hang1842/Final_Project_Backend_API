@@ -7,7 +7,7 @@ using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 namespace Backend_API.Models
 {
     [Index("PerEmail", IsUnique = true)]
-    public class Personals
+    public class personals
     {
         public int PerId { get; set; }
         public string PerName { get; set; } = default!;
@@ -15,7 +15,7 @@ namespace Backend_API.Models
         public string PerPassword { get; set; } = default!;
         public float? PerBalance { get; set; }
 
-        public List<Payments> Payments { get; set; }
+        public List<payments> payments { get; set; }
 
         public Personals(int perId, string perName, string perEmail, string perPassword, float? perBalance)
         {

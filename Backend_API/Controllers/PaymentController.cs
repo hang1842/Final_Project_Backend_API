@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using Backend.Services;
 using Backend_API.Data;
 using Backend.Dtos;
+using Backend_API.Models;
 
 namespace Backend_API.Controllers
 {
@@ -21,23 +22,24 @@ namespace Backend_API.Controllers
         public ActionResult<PaymentResponse> NewPayment(PaymentRequest request)
         {
             var response = new PaymentResponse();
-            _db.Payments.Add(request);
+            var payment = new payments(0, request.perEmail, request.merEmail, request.amount, DateTime.Now, null, 0);
+            _db.Payments.Add(payment);
             _db.SaveChanges();
 
             response.Message = "A new Payment has been added.";
             return response;
         }
         [HttpPut]
-        public ActionResult<PaymentResponse> UpdatePayment(int id, PaymentRequest request)
+        public ActionResult<PaymentResponse> UpdatePayment(int id)
         {
             var response = new PaymentResponse();
             var ExistingPayment = _db.Payments.Find(id);
             if (ExistingPayment != null) 
             {
-                ExistingPayment.Status = true;
+                ExistingPayment.Status = 1;
                 ExistingPayment.PaidDate= DateTime.Now;
             }
-            response.Message = $"The Payment {id} has been confirmed by {request.personalId}";
+            response.Message = $"The Payment {id} has been confirmed.";
             return response;
         }
     }
