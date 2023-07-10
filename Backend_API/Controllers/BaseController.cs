@@ -1,4 +1,5 @@
 ﻿using Backend.Services;
+using Backend_API.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +9,8 @@ namespace Backend_API.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        private string PublicKey = "DigiCoin";
-        private string PrivateKey = "Greg";
-        RSAService.Generator(out PrivateKey, out PublicKey, int 1024);
+        //private string PublicKey = "DigiCoin";
+        //private string PrivateKey = "Greg";
+        //RSAService.Generator(out PrivateKey, out PublicKey, int 1024);
     }
 }

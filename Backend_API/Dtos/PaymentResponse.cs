@@ -8,5 +8,9 @@
         {
             Message = message;
         }
+
+        public PaymentResponse()
+        {
+        }
     }
 }

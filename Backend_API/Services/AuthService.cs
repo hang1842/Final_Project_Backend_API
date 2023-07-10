@@ -14,7 +14,7 @@ namespace Backend.Services
             _config = config;
         }
 
-        public string generateToken(string email)
+        public string GenerateToken(string email)
         {
             var issuer = _config["JwtSettings:Issuer"];
             var audience = _config["JwtSettings:Audience"];
