@@ -25,7 +25,8 @@ namespace Backend_API.Controllers
         {
             var response = new RegisterResponse();
 
-            _db.Personals.Add(per);
+            var personal = new personals(0, per.PerName, per.email, per.password, per.Balance);
+            _db.Personals.Add(personal);
             _db.SaveChanges();
 
             response.Message = $"{per.PerName} has been added to Database successfully.";
