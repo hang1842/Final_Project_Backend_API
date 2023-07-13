@@ -5,8 +5,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.Text;
 using Backend_API.Data;
+using Stripe;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 //Add a Database link
 builder.Services.AddDbContext<PaymentContext>(options =>
@@ -14,6 +17,7 @@ builder.Services.AddDbContext<PaymentContext>(options =>
     throw new InvalidOperationException("Connection string 'PaymentContext' not found.")));
 
 var config = builder.Configuration;
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecurerKey"];
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -21,7 +25,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMvcCore();
+builder.Services.AddCors(option =>
+{
+    option.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddRouting(options=>options.LowercaseUrls=true);
+
 builder.Services.AddAuthentication(authOption =>
 {
     authOption.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -82,7 +97,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(corsOption=>
+app.UseCors(corsOption =>
    corsOption.AllowAnyHeader()
    .AllowAnyMethod()
    .AllowAnyOrigin());
