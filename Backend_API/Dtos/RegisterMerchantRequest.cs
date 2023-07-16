@@ -11,7 +11,7 @@ namespace Backend.Dtos
         public string password { get; set; } = default!;
         public float? Balance { get; set; }
 
-        public RegisterMerchantRequest(merchants mer)
+        public RegisterMerchantRequest(cards mer)
         {
             MerName = mer.MchName;
             email = mer.MchEmail;

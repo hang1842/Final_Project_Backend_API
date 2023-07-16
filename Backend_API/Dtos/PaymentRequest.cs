@@ -4,10 +4,10 @@
     {
         public string perEmail { get; set; }=default!;
         public string merEmail { get; set; }= default!;
-        public float? amount { get; set; }
+        public decimal? amount { get; set; }
         public bool status { get; set; } = false;
 
-        public PaymentRequest(string perEmail, string merEmail, float? amount, bool status)
+        public PaymentRequest(string perEmail, string merEmail, decimal? amount, bool status)
         {
             this.perEmail = perEmail;
             this.merEmail = merEmail;

@@ -22,7 +22,7 @@ namespace Backend_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CheckoutOrder([FromBody] payments payment, [FromServices] IServiceProvider sp)
+        public async Task<ActionResult> CheckoutOrder([FromBody] Payments payment, [FromServices] IServiceProvider sp)
         {
             var referer = Request.Headers.Referer;
             s_wasmClientURL = referer[0];
@@ -55,7 +55,7 @@ namespace Backend_API.Controllers
         }
 
         [NonAction]
-        public async Task<string> CheckOut(payments payment, string thisApiUrl)
+        public async Task<string> CheckOut(Payments payment, string thisApiUrl)
         {
             // Create a payment flow from the items in the cart.
             // Gets sent to Stripe API.

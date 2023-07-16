@@ -20,7 +20,7 @@ namespace Backend_API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<RegisterResponse> AddNewMerchant(merchants mer)
+        public ActionResult<RegisterResponse> AddNewMerchant(cards mer)
         {
             var response = new RegisterResponse();
 

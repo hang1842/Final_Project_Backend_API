@@ -6,12 +6,12 @@ using Backend_API.Data;
 
 namespace Backend_API.Controllers
 {
-    public class AuthPersonalController : BaseController
+    public class AuthUsersController : BaseController
     {
         private readonly PaymentContext _db;
         private readonly AuthService _auth;
 
-        public AuthPersonalController(PaymentContext db, AuthService auth)
+        public AuthUsersController(PaymentContext db, AuthService auth)
         {
             _auth = auth;
             _db = db;
@@ -22,21 +22,21 @@ namespace Backend_API.Controllers
         {
             var response = new AuthResponse();
 
-            var user = _db.Personals.Where(user => user.PerEmail == request.email).SingleOrDefault();
+            var user = _db.Users.Where(user => user.user_email == request.email).SingleOrDefault();
             if (user == null)
             {
                 response.Message = "Username was invaild";
                 return response;
             }
 
-            var passwordcorrect = user.PerPassword == request.password;
+            var passwordcorrect = user.user_password == request.password;
             if (passwordcorrect)
             {
                 response.Message = "Password was invaild";
                 return response;
             }
 
-            var personalToken = _auth.GenerateToken(user.PerEmail);
+            var personalToken = _auth.GenerateToken(user.user_email);
             if (personalToken != null)
             {
                 response.Message = "Authentication was invaid";

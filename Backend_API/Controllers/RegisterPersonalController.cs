@@ -25,7 +25,7 @@ namespace Backend_API.Controllers
         {
             var response = new RegisterResponse();
 
-            var personal = new personals(0, per.PerName, per.email, per.password, per.Balance);
+            var personal = new users(0, per.PerName, per.email, per.password, per.Balance);
             _db.Personals.Add(personal);
             _db.SaveChanges();
 

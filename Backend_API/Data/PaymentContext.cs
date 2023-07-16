@@ -11,9 +11,9 @@ namespace Backend_API.Data
         {
         }
 
-        public DbSet<merchants> Merchants { get; set; }
-        public DbSet<payments> Payments { get; set; }
-        public DbSet<personals> Personals { get; set; }
+        public DbSet<Cards> Cards { get; set; }
+        public DbSet<Payments> Payments { get; set; }
+        public DbSet<Users> Users{ get; set; }
 
     }
 }

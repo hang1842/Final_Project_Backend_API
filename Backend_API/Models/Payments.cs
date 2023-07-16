@@ -3,21 +3,20 @@ using System.Text;
 
 namespace Backend_API.Models
 {
-    public class payments
+    public class Payments
     {
         public int PaymentId { get; set; }
         public string PerEmail { get; set; } = default!;
         public string MchEmail { get; set; } = default!;
-        public personals? personal { get; set; }
-        public merchants? merchants { get; set; }
-        public float? Amount { get; set; }
+        public Users? personal { get; set; }
+        public decimal? Amount { get; set; }
         public DateTime? CreateDate { get; set; }
 
         public DateTime? PaidDate { get; set; }
 
         public int Status { get; set; } = 0;
 
-        public payments(int paymentId, string perEmail, string mchEmail, float? amount, 
+        public Payments(int paymentId, string perEmail, string mchEmail, decimal? amount, 
             DateTime createDate, DateTime? paidDate, int status)
         {
             PaymentId = paymentId;

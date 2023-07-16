@@ -22,7 +22,7 @@ namespace Backend_API.Controllers
         public ActionResult<PaymentResponse> NewPayment(PaymentRequest request)
         {
             var response = new PaymentResponse();
-            var payment = new payments(0, request.perEmail, request.merEmail, request.amount, DateTime.Now, null, 0);
+            var payment = new Payments(0, request.perEmail, request.merEmail, request.amount, DateTime.Now, null, 0);
             _db.Payments.Add(payment);
             _db.SaveChanges();
 
