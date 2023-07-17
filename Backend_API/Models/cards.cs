@@ -11,7 +11,6 @@ namespace Backend_API.Models
         public string card_bank { get; set; } = default!;
         public string card_number { get; set; } = default!;
         public string card_type { get; set; } = default!;
-        public decimal? card_balance { get; set; }
         public int user_Id { get; set; }
         public Users? users { get; set; }
 
@@ -22,7 +21,6 @@ namespace Backend_API.Models
             this.card_bank = card_bank;
             this.card_number = card_number;
             this.card_type = card_type;
-            this.card_balance = card_balance;
             this.user_Id = user_Id;
         }
 

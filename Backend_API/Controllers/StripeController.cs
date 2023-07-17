@@ -22,11 +22,11 @@ namespace Backend_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CheckoutOrder([FromBody] Payments payment, [FromServices] IServiceProvider sp)
+        public async Task<ActionResult<Backend.Dtos.StripeResponse>> StripeResponse([FromBody] Backend.Dtos.StripeRequest request, [FromServices] IServiceProvider sp)
         {
             var referer = Request.Headers.Referer;
             s_wasmClientURL = referer[0];
-
+           
             // Build the URL to which the customer will be redirected after paying.
             var server = sp.GetRequiredService<IServer>();
 
@@ -41,7 +41,7 @@ namespace Backend_API.Controllers
 
             if (thisApiUrl is not null)
             {
-                var sessionId = await CheckOut(payment, thisApiUrl);
+                var sessionId = await CheckOut(request, thisApiUrl);
                 var pubKey = _config["Stripe:PubKey"];
 
                 var stripeResponse = new Backend.Dtos.StripeResponse(sessionId, pubKey);
@@ -55,7 +55,7 @@ namespace Backend_API.Controllers
         }
 
         [NonAction]
-        public async Task<string> CheckOut(Payments payment, string thisApiUrl)
+        public async Task<string> CheckOut(Backend.Dtos.StripeRequest request, string thisApiUrl)
         {
             // Create a payment flow from the items in the cart.
             // Gets sent to Stripe API.
@@ -74,11 +74,11 @@ namespace Backend_API.Controllers
                 {
                     PriceData = new SessionLineItemPriceDataOptions
                     {
-                        UnitAmount = (long?)payment.Amount, // Price is in USD cents.
-                        Currency = "USD",
+                        UnitAmount = (long?)request.Amount, // Price is in USD cents.
+                        Currency = "NZD",
                         ProductData = new SessionLineItemPriceDataProductDataOptions
                         {
-                            Name = payment.PerEmail,
+                            Name = request.PerEmail,
                             Description = null,
                             Images = null
                         },

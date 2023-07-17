@@ -10,6 +10,7 @@ namespace Backend_API.Models
         public string MchEmail { get; set; } = default!;
         public Users? personal { get; set; }
         public decimal? Amount { get; set; }
+        public string payment_method { get; set; }=default!;
         public DateTime? CreateDate { get; set; }
 
         public DateTime? PaidDate { get; set; }
@@ -17,12 +18,13 @@ namespace Backend_API.Models
         public int Status { get; set; } = 0;
 
         public Payments(int paymentId, string perEmail, string mchEmail, decimal? amount, 
-            DateTime createDate, DateTime? paidDate, int status)
+            string payment_method, DateTime? createDate, DateTime? paidDate, int status)
         {
             PaymentId = paymentId;
             PerEmail = perEmail;
             MchEmail = mchEmail;
             Amount = amount;
+            this.payment_method = payment_method;
             CreateDate = createDate;
             PaidDate = paidDate;
             Status = status;

@@ -13,18 +13,20 @@ namespace Backend_API.Models
         public string user_name { get; set; } = default!;
         public string user_email { get; set; } = default!;
         public string user_password { get; set; } = default!;
-        public string user_category { get; set; } = default!; 
+        public string user_category { get; set; } = default!;
+        public decimal? balance { get; set; }
         public List<Cards> cards { get; set; }
         public List<Payments> payments { get; set; }
 
         public Users(int user_Id, string user_name, string user_email, 
-            string user_password, string user_category)
+            string user_password, string user_category, decimal? balance)
         {
             this.user_Id = user_Id;
             this.user_name = user_name;
             this.user_email = user_email;
             this.user_password = user_password;
-            this.user_category = user_category;            
+            this.user_category = user_category;
+            this.balance = balance;
         }
 
         public static string HashString(string input)

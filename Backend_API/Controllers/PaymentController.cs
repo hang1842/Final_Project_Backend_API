@@ -22,13 +22,30 @@ namespace Backend_API.Controllers
         public ActionResult<PaymentResponse> NewPayment(PaymentRequest request)
         {
             var response = new PaymentResponse();
-            var payment = new Payments(0, request.perEmail, request.merEmail, request.amount, DateTime.Now, null, 0);
+            var payment = new Payments(0, request.perEmail, request.merEmail, request.amount,request.payment_method, DateTime.Now, null, 0);
             _db.Payments.Add(payment);
             _db.SaveChanges();
 
             response.Message = "A new Payment has been added.";
             return response;
         }
+
+        [HttpGet]
+        public ActionResult<ConfirmResponse> SendConfirm(string PerEmail)
+        {
+            var response = new ConfirmResponse();
+            var lastest = _db.Payments.Where(payment => payment.PerEmail == PerEmail)
+                .OrderByDescending(payment => payment.CreateDate).SingleOrDefault();
+
+            if (lastest == null)
+            {
+                response = new ConfirmResponse("Payment was invalid");
+                return response;
+            }
+            response = new ConfirmResponse(lastest.PaymentId, lastest.PerEmail, lastest.MchEmail, lastest.Amount);
+            return response;
+        }
+
         [HttpPut]
         public ActionResult<PaymentResponse> UpdatePayment(int id)
         {
