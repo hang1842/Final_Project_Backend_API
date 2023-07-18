@@ -15,17 +15,19 @@ namespace Backend_API.Models
         public string user_password { get; set; } = default!;
         public string user_category { get; set; } = default!;
         public decimal? balance { get; set; }
+        public int user_pin { get; set; } = default!;  
         public List<Cards> cards { get; set; }
         public List<Payments> payments { get; set; }
 
         public Users(int user_Id, string user_name, string user_email, 
-            string user_password, string user_category, decimal? balance)
+            string user_password, string user_category, int user_pin,decimal? balance)
         {
             this.user_Id = user_Id;
             this.user_name = user_name;
             this.user_email = user_email;
             this.user_password = user_password;
             this.user_category = user_category;
+            this.user_pin = user_pin;
             this.balance = balance;
         }
 
