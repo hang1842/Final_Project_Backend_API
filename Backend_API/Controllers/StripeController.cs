@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Stripe.Checkout;
 using Backend.Dtos;
-using Backend_API.Models;
+using Backend.Models;
 
 namespace Backend_API.Controllers
 {

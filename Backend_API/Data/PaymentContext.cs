@@ -1,8 +1,8 @@
-﻿using Backend_API.Models;
+﻿using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Backend_API.Data
+namespace Backend.Data
 {
     public class PaymentContext:DbContext
     {

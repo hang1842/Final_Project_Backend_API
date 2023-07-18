@@ -2,7 +2,7 @@
 using Backend.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Backend_API.Data;
+using Backend.Data;
 
 namespace Backend_API.Controllers
 {

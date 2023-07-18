@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Backend_API.Models
+namespace Backend.Models
 {
     public class Payments
     {

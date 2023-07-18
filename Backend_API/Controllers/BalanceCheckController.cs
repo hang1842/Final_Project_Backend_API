@@ -1,9 +1,8 @@
-﻿using Backend_API.Data;
+﻿using Backend.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using Backend.Dtos;
-using Backend_API.Dtos;
 
 namespace Backend_API.Controllers
 {

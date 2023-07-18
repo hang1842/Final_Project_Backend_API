@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
-namespace Backend_API.Models
+namespace Backend.Models
 {
     [Index("user_email", IsUnique = true)]
     public class Users

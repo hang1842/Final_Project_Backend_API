@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Backend_API.Models
+namespace Backend.Models
 {
     [Index("card_number",IsUnique=true)]
     public class Cards

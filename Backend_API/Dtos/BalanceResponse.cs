@@ -1,4 +1,4 @@
-﻿namespace Backend_API.Dtos
+﻿namespace Backend.Dtos
 {
     public class BalanceResponse
     {

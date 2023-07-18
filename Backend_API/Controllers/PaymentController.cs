@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
 using Backend.Services;
-using Backend_API.Data;
+using Backend.Data;
 using Backend.Dtos;
-using Backend_API.Models;
+using Backend.Models;
 
 namespace Backend_API.Controllers
 {

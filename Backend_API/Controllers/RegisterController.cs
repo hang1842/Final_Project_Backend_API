@@ -1,12 +1,11 @@
 ﻿using Backend.Dtos;
-using Backend_API.Models;
+using Backend.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
-using Backend_API.Data;
+using Backend.Data;
 using Backend.Services;
-using Backend_API.Dtos;
 
 namespace Backend_API.Controllers
 {
