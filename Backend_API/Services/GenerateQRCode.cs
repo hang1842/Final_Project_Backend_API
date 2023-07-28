@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Text;
 
-namespace Backend_API.Services
+namespace Backend.Services
 {
     public class GenerateQRCode
     {

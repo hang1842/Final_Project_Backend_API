@@ -12,38 +12,54 @@ namespace Backend_API.Controllers
     {
         private readonly AuthService _auth;
         private readonly PaymentContext _db;
+        private readonly IHttpClientFactory _http;
 
-        public PaymentController(AuthService auth, PaymentContext db)
+        public PaymentController(AuthService auth, PaymentContext db, IHttpClientFactory http)
         {
             _auth = auth;
             _db = db;
+            _http = http;
         }
+
         [HttpPost]
         public ActionResult<PaymentResponse> NewPayment(PaymentRequest request)
         {
             var response = new PaymentResponse();
-            var payment = new Payments(0, request.perEmail, request.merEmail, request.amount,request.payment_method, DateTime.Now, null, 0);
+            var payment = new Payments(0,request.perEmail, request.merEmail, request.amount,
+                request.payment_method, DateTime.Now, null, 0);
             _db.Payments.Add(payment);
             _db.SaveChanges();
 
-            response.Message = "A new Payment has been added.";
-            return response;
-        }
+            var user = _db.Users.Find(request.perEmail);
 
-        [HttpGet]
-        public ActionResult<ConfirmResponse> SendConfirm(string PerEmail)
-        {
-            var response = new ConfirmResponse();
-            var lastestpayment = _db.Payments.Where(payment => payment.PerEmail == PerEmail)
-                .OrderByDescending(payment => payment.CreateDate).SingleOrDefault();
-
-            if (lastestpayment == null)
+            if (user == null)
             {
-                response = new ConfirmResponse("Payment was invalid");
+                response.Message = "User was invalid";
                 return response;
             }
-            response = new ConfirmResponse(lastestpayment.PaymentId, lastestpayment.PerEmail,
-                lastestpayment.MchEmail, lastestpayment.Amount);
+
+            if (user.user_pin != request.pin)
+            {
+                response.Message = "Pin number was invalid";
+                return response;
+            }
+
+            if (user.balance < request.amount)
+            {
+                response.Message = "Your Local Balance is not enough!";
+                return response;
+            }
+
+            if(request.payment_method == "Stripe")
+            {
+                var client = _http.CreateClient();
+                var stripe = client.GetAsync("https://Backend_API/api/stripe");
+                response.Message= stripe.Result.ToString();
+                return response;
+            }
+
+            Processor(request.perEmail, request.merEmail, request.amount);
+            response.Message = "The payment has been paid";
             return response;
         }
 
@@ -52,6 +68,7 @@ namespace Backend_API.Controllers
         {
             var response = new PaymentResponse();
             var ExistingPayment = _db.Payments.Find(id);
+
             if (ExistingPayment != null) 
             {
                 ExistingPayment.Status = 1;
@@ -63,7 +80,6 @@ namespace Backend_API.Controllers
 
             response.Message = $"The Payment {id} has been confirmed and closed the deal.";
             return response;
-
         }
 
 

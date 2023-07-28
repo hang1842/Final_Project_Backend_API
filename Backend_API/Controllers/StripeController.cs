@@ -9,7 +9,7 @@ using Backend.Models;
 
 namespace Backend_API.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+   // [ApiExplorerSettings(IgnoreApi = true)]
     public class StripeController : BaseController
     {
         private readonly IConfiguration _config;

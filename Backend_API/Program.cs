@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Configuration;
 using System.Text;
-using Backend_API.Data;
+using Backend.Data;
 using Stripe;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 

@@ -1,4 +1,4 @@
-﻿using Backend_API.Models;
+﻿using Backend.Models;
 
 namespace Backend.Dtos
 {
