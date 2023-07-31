@@ -7,6 +7,7 @@ using System.Text;
 using Backend.Data;
 using Stripe;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecurerKey"];
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<PaymentService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

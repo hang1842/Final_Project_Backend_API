@@ -12,13 +12,13 @@ namespace Backend_API.Controllers
     {
         private readonly AuthService _auth;
         private readonly PaymentContext _db;
-        private readonly IHttpClientFactory _http;
+        private readonly PaymentService _pay;
 
-        public PaymentController(AuthService auth, PaymentContext db, IHttpClientFactory http)
+        public PaymentController(AuthService auth, PaymentContext db, PaymentService pay)
         {
             _auth = auth;
             _db = db;
-            _http = http;
+            _pay = pay;
         }
 
         [HttpPost]
@@ -44,21 +44,7 @@ namespace Backend_API.Controllers
                 return response;
             }
 
-            if (user.balance < request.amount)
-            {
-                response.Message = "Your Local Balance is not enough!";
-                return response;
-            }
-
-            if(request.payment_method == "Stripe")
-            {
-                var client = _http.CreateClient();
-                var stripe = client.GetAsync("https://Backend_API/api/stripe");
-                response.Message= stripe.Result.ToString();
-                return response;
-            }
-
-            Processor(request.perEmail, request.merEmail, request.amount);
+            _pay.ProcessPayment(request);
             response.Message = "The payment has been paid";
             return response;
         }
